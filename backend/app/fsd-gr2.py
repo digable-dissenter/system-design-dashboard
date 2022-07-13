@@ -6,7 +6,7 @@ from sqlalchemy.engine import URL, create_engine, Inspector
 
 # Use your own server connection here
 cnxn_str = ("Driver={SQL Server Native Client 11.0};"
-            "Server=DESKTOP-N5Q4FJ2;"
+            "Server=DAIYAAN;"
             "Database=AIFMRM_ERS;"
             "Trusted_Connection=yes;")
 
@@ -25,7 +25,16 @@ with engine.connect() as cnxn:
                 query = select_template.format(table_name = tname)
                 frames_dict[tname] = pd.read_sql(query, cnxn)
 
-print(table_name_list)
+
+"""Keys in frames_dict Dictionary:
+tbl_Industry_Classification_Benchmark
+tbl_FTSEJSE_Index_Series 
+tbl_EOD_Equity_Data
+tbl_EOD_Interest_Rate_Data
+tbl_Beta_Output 
+tbl_BA_Beta_Output
+tbl_Index_Constituents """
+
 # cursor = cnxn.cursor()
 
 # # convert to format yyyy-mm-dd
