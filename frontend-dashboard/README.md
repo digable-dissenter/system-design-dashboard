@@ -1,39 +1,24 @@
-# Group II Financial Systems Design Dashboard
+# aifmrm_ers_dashboard
 
-## Table of Contents <!-- omit in toc -->
-
-<!-- TOC -->
-- [Prerequisites](#prerequisites)
-- [Installing Vue](#contributing)
-- [Run The Application](#run-the-application)
-- [Additional Docs](#additional-docs)
-<!-- /TOC -->
-
-## Prerequisites
-
-### Installing Vue
-
-```bash
-npm i
+## Project setup
 ```
-1. install NPM dependencies
-```bash
-npm run start
+npm install
 ```
-2. start the application
 
-**[⬆ back to top](#table-of-contents)**
-
-### Run The Application
-```bash
-npm run start
+### Compiles and hot-reloads for development
 ```
-This will automatically start the application via a local server at localhost:8080.
+npm run serve
+```
 
-**[⬆ back to top](#table-of-contents)**
+### Compiles and minifies for production
+```
+npm run build
+```
 
-### Additional Docs
+### Lints and fixes files
+```
+npm run lint
+```
 
-
-
-**[⬆ back to top](#table-of-contents)**
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
