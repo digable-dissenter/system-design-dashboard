@@ -35,7 +35,7 @@ tbl_Beta_Output
 tbl_BA_Beta_Output
 tbl_Index_Constituents """
 
-# cursor = cnxn.cursor()
+# #cursor = cnxn.cursor()
 
 # # convert to format yyyy-mm-dd
 # date = date.strftime("%Y-%m-%d")  
@@ -46,9 +46,9 @@ tbl_Index_Constituents """
 #          f"WHERE [Date] = '{date}'")
 
 # # execute the query and read to a dataframe in Python
-# data = pd.read_sql(query, cnxn)
+#data = pd.read_sql(query, cnxn)
 
-# print(data.head(26))
+#print(data.head(26))
 
 # # close the connection
 # del cnxn
