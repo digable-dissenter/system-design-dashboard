@@ -26,7 +26,20 @@ with engine.connect() as cnxn:
                 frames_dict[tname] = pd.read_sql(query, cnxn)
 
 
+<<<<<<< HEAD:backend/app/models.py
 print(frames_dict)
+=======
+"""Keys in frames_dict Dictionary:
+tbl_Industry_Classification_Benchmark
+tbl_FTSEJSE_Index_Series 
+tbl_EOD_Equity_Data
+tbl_EOD_Interest_Rate_Data
+tbl_Beta_Output 
+tbl_BA_Beta_Output
+tbl_Index_Constituents """
+
+# #cursor = cnxn.cursor()
+>>>>>>> 945b40955d6d1eccf63b7f816694d5c3eba1b33e:backend/app/fsd-gr2.py
 
 # # convert to format yyyy-mm-dd
 # date = date.strftime("%Y-%m-%d")  
@@ -37,9 +50,9 @@ print(frames_dict)
 #          f"WHERE [Date] = '{date}'")
 
 # # execute the query and read to a dataframe in Python
-# data = pd.read_sql(query, cnxn)
+#data = pd.read_sql(query, cnxn)
 
-# print(data.head(26))
+#print(data.head(26))
 
 # # close the connection
 # del cnxn
