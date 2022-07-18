@@ -1,18 +1,18 @@
 # imports for SQL data part
-import pyodbc 
-from datetime import datetime, timedelta
 import pandas as pd
 from sqlalchemy.engine import URL, create_engine, Inspector
 
 # Use your own server connection here
 cnxn_str = ("Driver={SQL Server Native Client 11.0};"
-            "Server=DAIYAAN;"
+            "Server=DESKTOP-N5Q4FJ2;"
             "Database=AIFMRM_ERS;"
             "Trusted_Connection=yes;")
 
 cnxn_url = URL.create("mssql+pyodbc", query={"odbc_connect": cnxn_str})
 
 engine = create_engine(cnxn_url)
+
+
 
 # initialise connection via context manager           
 with engine.connect() as cnxn:
@@ -26,16 +26,7 @@ with engine.connect() as cnxn:
                 frames_dict[tname] = pd.read_sql(query, cnxn)
 
 
-"""Keys in frames_dict Dictionary:
-tbl_Industry_Classification_Benchmark
-tbl_FTSEJSE_Index_Series 
-tbl_EOD_Equity_Data
-tbl_EOD_Interest_Rate_Data
-tbl_Beta_Output 
-tbl_BA_Beta_Output
-tbl_Index_Constituents """
-
-# cursor = cnxn.cursor()
+print(frames_dict)
 
 # # convert to format yyyy-mm-dd
 # date = date.strftime("%Y-%m-%d")  
