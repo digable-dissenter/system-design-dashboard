@@ -1,19 +1,15 @@
 <template>
-  
-  <SignUp/>
+  <router-view/>
 </template>
 
 <script>
 
-//import component
-import SignUp from './components/SignUp.vue'
 
-//register component
+
+
 export default {
   name: 'App',
-  components:{
-    SignUp
-  }
+  
   
 }
 </script>
@@ -25,6 +21,56 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
+}
+
+body{
+  padding:0;
+  margin:0;
+}
+.logo{
+    width:300px
+}
+
+.register input, .login input{
+    width: 300px;
+    height: 40px;
+    padding-left: 20px;
+    display: block;
+    margin-bottom: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid black;
+
+}
+
+
+.register button, .login button {
+    width: 320px;
+    height: 40px;
+    border: 1px solid grey;
+    cursor: pointer;
+
+}
+
+.nav a {
+
+float: left;
+color: white;
+padding: 14px 16px;
+text-align: center;
+font-size: 17px;
+text-decoration: none;
+margin: 5px;
+
+}
+
+.nav a:hover {
+  
+  background:#ddd;
+  color:#333
+
+
+
 }
 </style>
