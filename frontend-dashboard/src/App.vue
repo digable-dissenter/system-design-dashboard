@@ -1,17 +1,11 @@
 <template>
   <router-view/>
 </template>
-
 <script>
 
-
-
-
-export default {
-  name: 'App',
-  
-  
-}
+  export default {
+    name: 'App',  
+  }
 </script>
 
 <style>
@@ -20,57 +14,48 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  
+  color: #2c3e50;  
 }
 
 body{
   padding:0;
   margin:0;
 }
+  
 .logo{
-    width:300px
+  width:300px
 }
 
 .register input, .login input{
-    width: 300px;
-    height: 40px;
-    padding-left: 20px;
-    display: block;
-    margin-bottom: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid black;
-
+  width: 300px;
+  height: 40px;
+  padding-left: 20px;
+  display: block;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid black;
 }
 
-
 .register button, .login button {
-    width: 320px;
-    height: 40px;
-    border: 1px solid grey;
-    cursor: pointer;
-
+  width: 320px;
+  height: 40px;
+  border: 1px solid grey;
+  cursor: pointer;
 }
 
 .nav a {
-
-float: left;
-color: white;
-padding: 14px 16px;
-text-align: center;
-font-size: 17px;
-text-decoration: none;
-margin: 5px;
-
+  float: left;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 17px;
+  text-decoration: none;
+  margin: 5px;
 }
 
-.nav a:hover {
-  
+.nav a:hover {  
   background:#ddd;
   color:#333
-
-
-
 }
 </style>

@@ -12,8 +12,6 @@ cnxn_url = URL.create("mssql+pyodbc", query={"odbc_connect": cnxn_str})
 
 engine = create_engine(cnxn_url)
 
-
-
 # initialise connection via context manager           
 with engine.connect() as cnxn:
         tables_df = pd.read_sql('SELECT [name] AS [table_name] FROM sys.tables', cnxn)
