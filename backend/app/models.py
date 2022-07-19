@@ -12,8 +12,6 @@ cnxn_url = URL.create("mssql+pyodbc", query={"odbc_connect": cnxn_str})
 
 engine = create_engine(cnxn_url)
 
-
-
 # initialise connection via context manager           
 with engine.connect() as cnxn:
         tables_df = pd.read_sql('SELECT [name] AS [table_name] FROM sys.tables', cnxn)
@@ -24,52 +22,3 @@ with engine.connect() as cnxn:
         for tname in table_name_list:
                 query = select_template.format(table_name = tname)
                 frames_dict[tname] = pd.read_sql(query, cnxn)
-
-
-<<<<<<< HEAD:backend/app/models.py
-print(frames_dict)
-=======
-"""Keys in frames_dict Dictionary:
-tbl_Industry_Classification_Benchmark
-tbl_FTSEJSE_Index_Series 
-tbl_EOD_Equity_Data
-tbl_EOD_Interest_Rate_Data
-tbl_Beta_Output 
-tbl_BA_Beta_Output
-tbl_Index_Constituents """
-
-# #cursor = cnxn.cursor()
->>>>>>> 945b40955d6d1eccf63b7f816694d5c3eba1b33e:backend/app/fsd-gr2.py
-
-# # convert to format yyyy-mm-dd
-# date = date.strftime("%Y-%m-%d")  
-
-
-# # build up our query string
-# query = ("SELECT * FROM dbo.tbl_EOD_Equity_Data "
-#          f"WHERE [Date] = '{date}'")
-
-# # execute the query and read to a dataframe in Python
-#data = pd.read_sql(query, cnxn)
-
-#print(data.head(26))
-
-# # close the connection
-# del cnxn
-# cnxn.close()
-
-# # make a few calculations
-# mean_price = data['Price'].mean()
-# std_price = data['Price'].std()
-
-# # get max price and price details
-# max_vals = data[['Instrument', 'Price']].sort_values(by=['Price'], ascending=False).iloc[0]
-
-# # write an email message
-# txt = (f"End of Day Equity data for period {date}"
-#         f"Mean prices: {mean_price}n"
-#         f"Standard deviation of prices: {std_price}n"
-#         f"Highest price of {max_vals['Price']} "
-#         f"received for {max_vals['Instrument']} instrument.")
-
-# This is a Test - Daiyaan
