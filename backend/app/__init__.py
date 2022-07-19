@@ -24,8 +24,8 @@ cnxn_url = URL.create("mssql+pyodbc", query={"odbc_connect": cnxn_str})
 with engine.connect() as cnxn:
     '''
         This context manager code is used to connect to the database, 
-        retrieve the database tables, load the tables into pandas dataframes,
-        and then close the connection.
+        retrieve the database tables, load the tables into a dictionary of pandas dataframes,
+        and then close the database connection.
     '''
     tables_df = pd.read_sql('SELECT [name] AS [table_name] FROM sys.tables', cnxn)
     table_name_list = tables_df.table_name
