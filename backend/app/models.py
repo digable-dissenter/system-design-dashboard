@@ -4,7 +4,7 @@ from sqlalchemy.engine import URL, create_engine, Inspector
 
 # Use your own server connection here
 cnxn_str = ("Driver={SQL Server Native Client 11.0};"
-            "Server=DESKTOP-N5Q4FJ2;"
+            "Server=DAIYAAN;"
             "Database=AIFMRM_ERS;"
             "Trusted_Connection=yes;")
 
@@ -26,9 +26,6 @@ with engine.connect() as cnxn:
                 frames_dict[tname] = pd.read_sql(query, cnxn)
 
 
-<<<<<<< HEAD:backend/app/models.py
-print(frames_dict)
-=======
 """Keys in frames_dict Dictionary:
 tbl_Industry_Classification_Benchmark
 tbl_FTSEJSE_Index_Series 
@@ -38,8 +35,16 @@ tbl_Beta_Output
 tbl_BA_Beta_Output
 tbl_Index_Constituents """
 
+print(frames_dict[])
+
 # #cursor = cnxn.cursor()
->>>>>>> 945b40955d6d1eccf63b7f816694d5c3eba1b33e:backend/app/fsd-gr2.py
+
+
+
+
+
+
+
 
 # # convert to format yyyy-mm-dd
 # date = date.strftime("%Y-%m-%d")  
