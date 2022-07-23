@@ -1,16 +1,16 @@
 from flask import Flask, render_template, request, jsonify, json
-from flask_cors import CORS, cross_origin
+# from flask_cors import CORS, cross_origin
 # from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL, create_engine, Inspector
 import pandas as pd
 
 app = Flask(__name__)
 
-Cors = CORS(app)
+# Cors = CORS(app)
 
-CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS = True)
+# CORS(app, resources={r'/*': {'origins': '*'}}, CORS_SUPPORTS_CREDENTIALS = True)
 
-app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Use your own server connection here
 cnxn_str = ("Driver={SQL Server Native Client 11.0};"

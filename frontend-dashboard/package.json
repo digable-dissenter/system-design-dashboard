@@ -2,10 +2,13 @@
   "name": "aifmrm_ers_dashboard",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
+  "scripts": {    
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve",
+    "test": "vue-cli-service test:unit",
+    "test:watch": "vue-cli-service test:unit --watch",
+    "test:coverage": "vue-cli-service test:unit --coverage"
   },
   "dependencies": {
     "axios": "^0.27.2",
