@@ -9,6 +9,8 @@ flask-cors = "==3.0.10"
 sqlalchemy = "==1.4.39"
 flask-sqlalchemy = "==2.5.1"
 pandas = "==1.4.3"
+pyodbc = "==4.0.34"
+pytest = "==7.1.2"
 
 [dev-packages]
 
