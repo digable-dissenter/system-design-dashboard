@@ -5,12 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write '**/*.js', '**/*.vue', '**/*.json', '**/*.css', '**/*.html'",
+    "lint": "eslint . --ext .js, .vue, .json, .html, .css --fix"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "core-js": "^3.8.3",
+    "lint": "^0.7.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

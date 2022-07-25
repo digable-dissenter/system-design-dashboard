@@ -9,7 +9,7 @@ export default {
   name: "StaticReports",
   data() {
     return {
-      msg: "Welcome to AIFMRM ERS Dashboard Landing Page",
+      msg: "",
     };
   },
   mounted() {
