@@ -1,16 +1,21 @@
 <template>
 <HeaderCode/>
 <h1>Welcome to AIFMRM ERS Dashboard Landing Page</h1>
+<HomeIntro/>
+
 </template>
 
 <script>
 
+
+
 import HeaderCode from './HeaderCode.vue'
+import HomeIntro from './HomeIntro.vue'
 
 export default {
     name:'HomePage',
-    components: {
-      HeaderCode
+    components: {HeaderCode,
+      HomeIntro
 
     },
 
@@ -23,5 +28,9 @@ export default {
         }
     }
 }
-
 </script>
+
+<style>
+
+
+</style>

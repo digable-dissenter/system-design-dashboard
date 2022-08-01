@@ -1,7 +1,8 @@
 <template>
 <div class="nav">
-<a href="#">Home</a>
+<a v-on:click="home" href="#">Home</a>
 <a href="#">Static Reports</a>
+<a v-on:click="faq" href="#">FAQ's</a>
 <a v-on:click="logout" href="#">Logout</a>
 
 </div>
@@ -18,7 +19,15 @@ export default {
         logout(){
         localStorage.clear();
         this.$router.push({name:'LoginPage'})
-        }
+        },
+        faq(){
+        this.$router.push({name:'FaqPage'})
+        },
+        home(){
+        this.$router.push({name:'HomePage'})
+        },
+        
+
 
         
     }
