@@ -36,10 +36,12 @@ def getBetasMktAndSpecVols(rDate,ICs,dbo_tbl_BA_Beta_Output,mktIndexCode):
     ICs = ICs
     tbl_BA_Beta_Output_IC = tbl_BA_Beta_Output_mktIndex.loc[tbl_BA_Beta_Output_mktIndex["Instrument"].isin(ICs)]
 
+    mktVol_row = tbl_BA_Beta_Output_mktIndex.loc[tbl_BA_Beta_Output_mktIndex["Instrument"] == mktIndexCode]
+
     #Generate results table with Shares and corresponding share weights
     Betas = tbl_BA_Beta_Output_IC.loc[:,"Beta"]
     specVols = tbl_BA_Beta_Output_IC.loc[:,"Unique Risk"]
-    mktVol = tbl_BA_Beta_Output_IC.loc[:,"Total Risk"]
+    mktVol = mktVol_row.loc[:,"Total Risk"]
     Results = pd.concat([Betas.reset_index(drop=True), specVols.reset_index(drop=True),mktVol.reset_index(drop=True)],axis=1)
     Results.columns = ['Betas','specVols','mktVol']
 
