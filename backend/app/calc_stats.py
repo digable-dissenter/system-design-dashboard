@@ -33,3 +33,7 @@ def CalcStats(weights,betas,specVols,mktVol):
     totCov = sysCov + specCov
 
     pfVol = pfSysVol + pfSpecVol
+
+    Tot = 0
+
+    CorrMat = np.matmul((np.matmul(np.linalg.inv(np.diag(Tot)),(sysCov + specCov))),np.linalg.inv(np.diag(Tot)))
