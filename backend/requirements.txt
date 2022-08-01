@@ -6,3 +6,4 @@ pandas == 1.4.3
 pyodbc == 4.0.34
 pytest == 7.1.2
 pycodestyle == 2.8.0
+pytest-azurepipelines == 1.0.3
