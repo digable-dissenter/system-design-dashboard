@@ -3,6 +3,7 @@ import SignUp from './components/SignUp.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from './components/LoginPage.vue'
 import StaticReports from './components/StaticReports.vue'
+import FaqPage from './components/FaqPage.vue'
 
 const routes = [{
     name: 'HomePage',
@@ -24,6 +25,12 @@ const routes = [{
     path: "/static-reports",
     name: "StaticReports",
     component: StaticReports,
+  },
+
+  {
+    path: "/FaqPage",
+    name: "FaqPage",
+    component: FaqPage,
   },
 
 ];

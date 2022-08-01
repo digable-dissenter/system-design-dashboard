@@ -1,14 +1,36 @@
-from main import create_dataframes
+'''
+    Author: Daiyaan Salie
+    
+'''
 import numpy as np
 import pandas as pd
-from weights_and_ics import getICsAndWeights
+from app.weights_and_ics import frames_dict, getICsAndWeights
 
-frames_dict = create_dataframes()
+frames_dict = frames_dict
+ICs = getICsAndWeights("2020-01-01","ALSI","tbl_Index_Constituents")
+ICs = ICs['Alpha']
 
-def getBetasMktAndSpecVols(rDate,ICs,dbo_tbl_BA_Beta_Output,mktIndexCode):
+def getBetasMktAndSpecVols(rDate,ICs,tbl_BA_Beta_Output,mktIndexCode):
+    '''
+        Write what function does:
+            Count the number of times `letter` appears in `content`.
+
+        Args:
+            table (str): dbo.tbl BA Beta Output.
+            datetime (date): rDate.
+            string (str): ICs.
+            string (str): mktIndexCode.
+
+        Returns:
+    
+
+        # Add a section detailing what errors might be raised
+        Raises:
+    
+    '''
 
     #Store tbl_BA_Beta_Output from frames_dict
-    tbl_BA_Beta_Output = frames_dict[dbo_tbl_BA_Beta_Output]
+    tbl_BA_Beta_Output = frames_dict[tbl_BA_Beta_Output]
 
     #rDate will be supplied by the user: consisting of year and Quarter 
     rDate = rDate
@@ -36,12 +58,13 @@ def getBetasMktAndSpecVols(rDate,ICs,dbo_tbl_BA_Beta_Output,mktIndexCode):
     ICs = ICs
     tbl_BA_Beta_Output_IC = tbl_BA_Beta_Output_mktIndex.loc[tbl_BA_Beta_Output_mktIndex["Instrument"].isin(ICs)]
 
+    mktVol_row = tbl_BA_Beta_Output_mktIndex.loc[tbl_BA_Beta_Output_mktIndex["Instrument"] == mktIndexCode]
+
     #Generate results table with Shares and corresponding share weights
     Betas = tbl_BA_Beta_Output_IC.loc[:,"Beta"]
     specVols = tbl_BA_Beta_Output_IC.loc[:,"Unique Risk"]
-    mktVol = tbl_BA_Beta_Output_IC.loc[:,"Total Risk"]
+    mktVol = mktVol_row.loc[:,"Total Risk"]
     Results = pd.concat([Betas.reset_index(drop=True), specVols.reset_index(drop=True),mktVol.reset_index(drop=True)],axis=1)
     Results.columns = ['Betas','specVols','mktVol']
 
     return Results
-    #return tbl_BA_Beta_Output_IC

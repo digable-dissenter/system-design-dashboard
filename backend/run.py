@@ -1,4 +1,6 @@
-from main import app
+from app import main
+
+app = main.app
 
 # Check if the run.py file has executed directly and not imported
 if __name__ == "__main__":

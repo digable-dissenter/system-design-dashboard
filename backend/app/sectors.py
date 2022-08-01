@@ -1,3 +1,3 @@
-from main import create_dataframes
+from app import main
 
 
