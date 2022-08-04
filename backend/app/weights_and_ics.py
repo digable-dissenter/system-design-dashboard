@@ -70,5 +70,3 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Results.columns = ['Alpha','Weights','Gross Market Capitalisation','ICB Sub-Sector']
 
     return Results
-
-    return Results
