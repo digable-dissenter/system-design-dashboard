@@ -26,19 +26,20 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     
     '''
     #rDate will be supplied by the user: consisting of year and Quarter 
+#rDate will be supplied by the user: consisting of year and Quarter 
     rDate = rDate
-    rDate = pd.to_datetime(rDate, format = "%Y-%m-%d")
-    rDate_Quarter = rDate.quarter
+    rDate = pd.to_datetime(rDate, format = "%Y-%m")
+    rDate_Month = rDate.month
     rDate_Year = rDate.year
 
     #search tbl_Index_Constituents Date column and find Quarter and Year for each date in column
-    Dates_Col = tbl_Index_Constituents["Date"]
+    Dates_Col = dbo_tbl_Index_Constituents["Date"]
     Dates_Col = pd.arrays.DatetimeArray(Dates_Col)
-    Dates_Col_Quarter = Dates_Col.quarter
+    Dates_Col_Month = Dates_Col.month
     Dates_Col_Year = Dates_Col.year
 
     #Filter tbl_Index_Constituents using supplied quarter and year data from rData
-    tbl_Index_Constituents_Date = tbl_Index_Constituents.loc[(Dates_Col_Quarter == rDate_Quarter) & (Dates_Col_Year == rDate_Year),]
+    tbl_Index_Constituents_Date = dbo_tbl_Index_Constituents.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
 
 
     #IndexCode is provided by user: "ALSI", "FLED", "LRGC", "MIDC", "SMLC", "TOPI", "RESI", "FINI", "INDI", "PCAP", "SAPY" or "ALTI"
@@ -63,7 +64,11 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Alpha = pd.DataFrame(tbl_Index_Constituents_final.loc[:,"Alpha"])
     Gross_Market_Capitalisation = np.array(tbl_Index_Constituents_final.loc[:,"Gross Market Capitalisation"])
     Weigths = pd.DataFrame(Gross_Market_Capitalisation/np.sum(Gross_Market_Capitalisation))
-    Results = pd.concat([Alpha.reset_index(drop=True), Weigths.reset_index(drop=True)],axis=1)
-    Results.columns = ['Alpha','Weights']
+    Gross_Market_Capitalisation = pd.DataFrame(Gross_Market_Capitalisation)
+    ICB_SubSector = pd.DataFrame(tbl_Index_Constituents_final.loc[:,"ICB Sub-Sector"])
+    Results = pd.concat([Alpha.reset_index(drop=True), Weigths.reset_index(drop=True),Gross_Market_Capitalisation.reset_index(drop=True),ICB_SubSector.reset_index(drop=True)],axis=1)
+    Results.columns = ['Alpha','Weights','Gross Market Capitalisation','ICB Sub-Sector']
+
+    return Results
 
     return Results
