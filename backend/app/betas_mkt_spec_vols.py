@@ -42,7 +42,7 @@ def getBetasMktAndSpecVols(rDate, ICs, tbl_BA_Beta_Output, mktIndexCode):
     Dates_Col_Year = Dates_Col.year
 
     #Filter tbl_BA_Beta_Output using supplied quarter and year data from rData
-    tbl_BA_Beta_Output_Date = dbo_tbl_BA_Beta_Output.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
+    tbl_BA_Beta_Output_Date = tbl_BA_Beta_Output.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
 
     #Market index code provided by the user which could be "J203", "J200", "J250", "J257" or "J258"
     mktIndexCode = mktIndexCode
