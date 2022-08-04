@@ -11,23 +11,22 @@ tbl_Index_Constituents = df_Index_Constituents
 def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     '''
         What function does:
-            
+            The function retrieves the date(year and quarter) as well as index-code which returns the weights and alphas for the 
+            shares on that index for that specific quarter.
 
         Args:
             table (str): dbo.tbl_Index_Constituents.
-            datetime (date): rDate.
+            datetime (date): rDate - Year and Quarter
             string (str): indexCode.            
 
         Returns:
-    
-
+            The function returns a column called "weights" and a column called "Alphas" for the filtered shares as well as the gross market cap
+            for each share as well as the ICB sub-sector to which each share belongs.
         # Add a section detailing what errors might be raised
         Raises:
     
     '''
     #rDate will be supplied by the user: consisting of year and Quarter 
-#rDate will be supplied by the user: consisting of year and Quarter 
-    rDate = rDate
     rDate = pd.to_datetime(rDate, format = "%Y-%m")
     rDate_Month = rDate.month
     rDate_Year = rDate.year
@@ -39,11 +38,11 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Dates_Col_Year = Dates_Col.year
 
     #Filter tbl_Index_Constituents using supplied quarter and year data from rData
-    tbl_Index_Constituents_Date = dbo_tbl_Index_Constituents.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
+    tbl_Index_Constituents_Date = tbl_Index_Constituents.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
 
 
     #IndexCode is provided by user: "ALSI", "FLED", "LRGC", "MIDC", "SMLC", "TOPI", "RESI", "FINI", "INDI", "PCAP", "SAPY" or "ALTI"
-    IndexCode = IndexCode #provided as input by the user. "ALSI" for testing purposes
+    IndexCode = IndexCode 
 
     #function to identify The index column that must be searched
     def Index_Col_Identifier(argument):
