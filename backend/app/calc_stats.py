@@ -13,6 +13,13 @@ ICs = output1["Alpha"]
 mktIndexCode = "J203"
 output2 = getBetasMktAndSpecVols("2020-01-01",ICs,tbl_BA_Beta_Output,mktIndexCode)
 
+
+weights = np.transpose(np.matrix(output1["Weights"]))
+betas = np.transpose(np.matrix(output2["Betas"]))
+specVols = np.transpose(np.matrix(output2["specVols"]))
+mktVol = output2["mktVol"][0]
+
+
 def CalcStats(weights,betas,specVols,mktVol):
     '''
         Write what function does:
@@ -39,17 +46,11 @@ def CalcStats(weights,betas,specVols,mktVol):
         Raises:
     
     '''
-    weights = np.transpose(np.matrix(output1["Weights"]))
-    betas = np.transpose(np.matrix(output2["Betas"]))
-    specVols = np.transpose(np.matrix(output2["specVols"]))
-    mktVol = np.array(output2["mktVol"])
-    mktVol = np.average(mktVol) #Assuming the mktVol is the average. NEED TO CONFIRM
-
-    pfBeta = np.matmul(np.transpose(weights),betas)
+    pfBeta = round(np.matmul(np.transpose(weights),betas),3)
 
     sysCov = np.matmul(betas,np.transpose(betas))*(mktVol**2)
 
-    pfSysVol = np.transpose(weights)@betas@np.transpose(betas)@(weights)*(mktVol**2)
+    pfSysVol = np.transpose(weights)@betas@np.transpose(betas)@weights*(mktVol**2)
 
     specCov = np.diagflat(specVols)@np.diagflat(specVols)
 
@@ -59,6 +60,10 @@ def CalcStats(weights,betas,specVols,mktVol):
 
     pfVol = pfSysVol + pfSpecVol
 
-    Tot = 0
+    d = np.diagflat(np.matrix(np.diag(totCov)))
+    
+    corrMat = (np.linalg.inv(d)@(sysCov+specCov))@np.linalg.inv(d)
 
-    CorrMat = np.matmul((np.matmul(np.linalg.inv(np.diag(Tot)),(sysCov + specCov))),np.linalg.inv(np.diag(Tot)))
+    Output = {"pfBeta" : pfBeta, "sysCov" : sysCov, "pfSysVol" : pfSysVol, "specCov" : specCov, "pfSpecVol" : pfSpecVol, "totCov" : totCov, "pfVol" : pfVol, "corrMat": CorrMat}
+    
+    return (Output)
