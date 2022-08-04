@@ -22,4 +22,3 @@ df_Index_Constituents = df_Index_Constituents.set_index("Alpha")
 df_Industry_Classification_Benchmark = df_Industry_Classification_Benchmark.set_index("Sub-Sector")
 
 from app import indices, sectors, shares
->>>>>>> 40c1656f989b06907c813790f61474f85ce1b478
