@@ -2,19 +2,16 @@
     Author: Daiyaan Salie   
      
 '''
-
 import numpy as np
 import pandas as pd
-from app.main import Database_df, engine
+from app.dataframes import df_Index_Constituents
 
-engine = engine
-db_class = Database_df()
-frames_dict = db_class.create_dataframes(engine)
+tbl_Index_Constituents = df_Index_Constituents
 
 def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     '''
-        Write what function does:
-            Count the number of times `letter` appears in `content`.
+        What function does:
+            
 
         Args:
             table (str): dbo.tbl_Index_Constituents.
@@ -28,9 +25,6 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
         Raises:
     
     '''
-    #Store tbl_Index_Constituents from frames_dict
-    tbl_Index_Constituents = frames_dict[tbl_Index_Constituents]
-
     #rDate will be supplied by the user: consisting of year and Quarter 
     rDate = rDate
     rDate = pd.to_datetime(rDate, format = "%Y-%m-%d")

@@ -1,6 +1,6 @@
 <template>
-<HeaderCode/>
-<h1>Welcome to AIFMRM ERS Dashboard Landing Page</h1>
+  <HeaderCode/>
+  <h1>Welcome to AIFMRM ERS Dashboard Landing Page</h1>
 <HomeIntro/>
 
 </template>

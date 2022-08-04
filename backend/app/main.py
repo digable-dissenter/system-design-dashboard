@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from sqlalchemy.engine import URL, create_engine
 import pandas as pd
 import pyodbc
@@ -38,4 +38,6 @@ class Database_df:
             
             return self.frames_dict
 
-from app import routes
+frames_dict = Database_df().create_dataframes(engine)
+
+from app import routes, indices , sectors, shares

@@ -1,13 +1,13 @@
 <template>
-<div class="nav">
-<a v-on:click="home" href="#">Home</a>
-<a href="#">Static Reports</a>
-<a v-on:click="faq" href="#">FAQ's</a>
-<a v-on:click="logout" href="#">Logout</a>
-
-</div>
+  <div class="nav">
+    <a v-on:click="home" href="#">Home</a>
+    <a v-on:click="indices" href="#">Indices</a>
+    <a v-on:click="sectors" href="#">Sectors</a>
+    <a v-on:click="shares" href="#">Shares</a>
+    <a v-on:click="faq" href="#">FAQ's</a>
+    <a v-on:click="logout" href="#">Logout</a>
+  </div>
 </template>
-
 <script>
 
 
@@ -26,10 +26,16 @@ export default {
         home(){
         this.$router.push({name:'HomePage'})
         },
-        
+        indices(){
+        this.$router.push({name:'Indices'})
+        },
+        sectors(){
+        this.$router.push({name:'Sectors'})
+        },
+        shares(){
+        this.$router.push({name:'Shares'})
+        } 
 
-
-        
     }
 }
 

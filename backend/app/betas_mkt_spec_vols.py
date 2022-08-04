@@ -4,16 +4,17 @@
 '''
 import numpy as np
 import pandas as pd
-from app.weights_and_ics import frames_dict, getICsAndWeights
+from app.dataframes import df_BA_Beta_Output
+from app.weights_and_ics import getICsAndWeights
 
-frames_dict = frames_dict
+tbl_BA_Beta_Output = df_BA_Beta_Output
 ICs = getICsAndWeights("2020-01-01","ALSI","tbl_Index_Constituents")
 ICs = ICs['Alpha']
 
-def getBetasMktAndSpecVols(rDate,ICs,tbl_BA_Beta_Output,mktIndexCode):
+def getBetasMktAndSpecVols(rDate, ICs, tbl_BA_Beta_Output, mktIndexCode):
     '''
-        Write what function does:
-            Count the number of times `letter` appears in `content`.
+        What function does:
+            
 
         Args:
             table (str): dbo.tbl BA Beta Output.
@@ -28,9 +29,6 @@ def getBetasMktAndSpecVols(rDate,ICs,tbl_BA_Beta_Output,mktIndexCode):
         Raises:
     
     '''
-
-    #Store tbl_BA_Beta_Output from frames_dict
-    tbl_BA_Beta_Output = frames_dict[tbl_BA_Beta_Output]
 
     #rDate will be supplied by the user: consisting of year and Quarter 
     rDate = rDate
