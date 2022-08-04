@@ -11,39 +11,38 @@ tbl_Index_Constituents = df_Index_Constituents
 def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     '''
         What function does:
-            
+            The function retrieves the date(year and quarter) as well as index-code which returns the weights and alphas for the 
+            shares on that index for that specific quarter.
 
         Args:
             table (str): dbo.tbl_Index_Constituents.
-            datetime (date): rDate.
+            datetime (date): rDate - Year and Quarter
             string (str): indexCode.            
 
         Returns:
-    
-
+            The function returns a column called "weights" and a column called "Alphas" for the filtered shares as well as the gross market cap
+            for each share as well as the ICB sub-sector to which each share belongs.
         # Add a section detailing what errors might be raised
         Raises:
     
     '''
     #rDate will be supplied by the user: consisting of year and Quarter 
-#rDate will be supplied by the user: consisting of year and Quarter 
-    rDate = rDate
     rDate = pd.to_datetime(rDate, format = "%Y-%m")
     rDate_Month = rDate.month
     rDate_Year = rDate.year
 
     #search tbl_Index_Constituents Date column and find Quarter and Year for each date in column
-    Dates_Col = dbo_tbl_Index_Constituents["Date"]
+    Dates_Col = tbl_Index_Constituents["Date"]
     Dates_Col = pd.arrays.DatetimeArray(Dates_Col)
     Dates_Col_Month = Dates_Col.month
     Dates_Col_Year = Dates_Col.year
 
     #Filter tbl_Index_Constituents using supplied quarter and year data from rData
-    tbl_Index_Constituents_Date = dbo_tbl_Index_Constituents.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
+    tbl_Index_Constituents_Date = tbl_Index_Constituents.loc[(Dates_Col_Month == rDate_Month) & (Dates_Col_Year == rDate_Year),]
 
 
     #IndexCode is provided by user: "ALSI", "FLED", "LRGC", "MIDC", "SMLC", "TOPI", "RESI", "FINI", "INDI", "PCAP", "SAPY" or "ALTI"
-    IndexCode = IndexCode #provided as input by the user. "ALSI" for testing purposes
+    IndexCode = IndexCode 
 
     #function to identify The index column that must be searched
     def Index_Col_Identifier(argument):
@@ -70,3 +69,13 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Results.columns = ['Alpha','Weights','Gross Market Capitalisation','ICB Sub-Sector']
 
     return Results
+
+Quarter_month = {1:3, 2:6, 3:9, 4:12}
+
+rDate_year = '2019' #Get year from user
+rDate_quarter = 2 #get quarter from user
+rDate_month = str(Quarter_month[rDate_quarter])
+rDate = rDate_year +"-"+ rDate_month #Create single date value from supplied year and quarter
+
+IndexCode = "ALSI" #Get input from user
+Output1 = getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents)
