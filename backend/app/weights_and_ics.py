@@ -69,3 +69,13 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Results.columns = ['Alpha','Weights','Gross Market Capitalisation','ICB Sub-Sector']
 
     return Results
+
+Quarter_month = {1:3, 2:6, 3:9, 4:12}
+
+rDate_year = '2019' #Get year from user
+rDate_quarter = 2 #get quarter from user
+rDate_month = str(Quarter_month[rDate_quarter])
+rDate = rDate_year +"-"+ rDate_month #Create single date value from supplied year and quarter
+
+IndexCode = "ALSI" #Get input from user
+Output1 = getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents)
