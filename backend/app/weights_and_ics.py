@@ -33,7 +33,7 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     rDate_Year = rDate.year
 
     #search tbl_Index_Constituents Date column and find Quarter and Year for each date in column
-    Dates_Col = dbo_tbl_Index_Constituents["Date"]
+    Dates_Col = tbl_Index_Constituents["Date"]
     Dates_Col = pd.arrays.DatetimeArray(Dates_Col)
     Dates_Col_Month = Dates_Col.month
     Dates_Col_Year = Dates_Col.year
