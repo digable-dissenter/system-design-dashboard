@@ -1,6 +1,3 @@
-from app import main
-import pandas as pd
-
 '''
     Author: Kenneth Ssekimpi
 '''
