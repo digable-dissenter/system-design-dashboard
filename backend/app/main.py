@@ -1,20 +1,36 @@
 from flask import Flask
-from sqlalchemy.engine import URL, create_engine
+from flask_cors import CORS, cross_origin
+import sqlalchemy
+# from sqlalchemy.engine import URL, create_engine
 import pandas as pd
-import pyodbc
+import pymssql 
 
 app = Flask(__name__)
 
 app.config.from_object(__name__)
 
-cnxn_str = ("Driver={SQL Server Native Client 11.0};"
-            "Server=DESKTOP-N5Q4FJ2;"
-            "Database=AIFMRM_ERS;"
-            "Trusted_Connection=yes;")
+CORS(app, resources={r"/*":{'origins':"*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-cnxn_url = URL.create("mssql+pyodbc", query={"odbc_connect": cnxn_str})
+@app.route('/')
+def index():
+    return "<span style='color:red'>I am app 1</span>"
 
-engine = create_engine(cnxn_url)
+# cnxn_str = ("Driver={SQL Server Native Client 11.0};"
+#             "Server=localhost;"
+#             "Database=AIFMRM_ERS;"
+#             "Trusted_Connection=yes;")
+
+# cnxn_url = URL.create("mssql+pyodbc", 
+#     # server = "localhost",
+#     database = "AIFMRM_ERS",
+#     username = 'sa',
+#     password='Ritravatra00043)',
+#     query=dict(driver="ODBC Driver 17 for SQL Server"))
+
+engine = sqlalchemy.create_engine("mssql+pymssql://sa:Ritravatra00043)@localhost/AIFMRM_ERS")
+
+# engine = create_engine(cnxn_url)
 class Database_df:
     def __init__(self, tables_df=pd.DataFrame(), table_name_list=[], select_template='', frames_dict={}):
         self.tables_df = tables_df
@@ -33,11 +49,9 @@ class Database_df:
             for tname in self.table_name_list:
                 query = self.select_template.format(table_name = tname)
                 self.frames_dict[tname] = pd.read_sql(query, cnxn)
-
+            # Close db connection
             cnxn.close()
-            
+            # Return dictionary of dataframes
             return self.frames_dict
 
 frames_dict = Database_df().create_dataframes(engine)
-
-from app import routes, indices , sectors, shares

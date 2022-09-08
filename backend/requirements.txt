@@ -8,3 +8,4 @@ pytest == 7.1.2
 pycodestyle == 2.8.0
 pytest-azurepipelines == 1.0.3
 rest_utils == 1.2.7
+pymssql == 2.2.5
