@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
-import sqlalchemy
-# from sqlalchemy.engine import URL, create_engine
+from sqlalchemy.engine import create_engine
 import pandas as pd
-import pymssql 
+import pyodbc
+from app.db import DatabaseClient
 
 app = Flask(__name__)
 
@@ -16,21 +16,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def index():
     return "<span style='color:red'>I am app 1</span>"
 
-# cnxn_str = ("Driver={SQL Server Native Client 11.0};"
-#             "Server=localhost;"
-#             "Database=AIFMRM_ERS;"
-#             "Trusted_Connection=yes;")
+db_client = DatabaseClient()
 
-# cnxn_url = URL.create("mssql+pyodbc", 
-#     # server = "localhost",
-#     database = "AIFMRM_ERS",
-#     username = 'sa',
-#     password='Ritravatra00043)',
-#     query=dict(driver="ODBC Driver 17 for SQL Server"))
+cnxn = db_client.pyodbc_localhost()
 
-engine = sqlalchemy.create_engine("mssql+pymssql://sa:Ritravatra00043)@localhost/AIFMRM_ERS")
-
-# engine = create_engine(cnxn_url)
+engine = create_engine(cnxn)
 class Database_df:
     def __init__(self, tables_df=pd.DataFrame(), table_name_list=[], select_template='', frames_dict={}):
         self.tables_df = tables_df

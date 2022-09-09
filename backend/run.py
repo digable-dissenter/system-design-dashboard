@@ -7,4 +7,4 @@ app = main.app
 if __name__ == "__main__":
     app.run(debug=True)
 
-from app import indices , sectors, shares, quarters, dataframes
+from app import db, indices , sectors, shares, quarters, dataframes
