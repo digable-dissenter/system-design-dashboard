@@ -5,20 +5,14 @@ class DatabaseClient:
         self.pyodbc_localhost()
 
     def pyodbc_localhost(self):
-        driver = '/usr/lib/libtdsodbc.so'
+        driver = '{ODBC Driver 17 for SQL Server}'
         server = "localhost"
         database = "AIFMRM_ERS"
-        username = 'sa'
-        password = 'Ritravatra00043)'
-        port = '1433'
+        cnxn_string = f"DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;"
         try:
-            cnxn = pyodbc.connect('DRIVER='+driver+';SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}')
+            cnxn = pyodbc.connect(cnxn_string)
         except Exception as e:
             print(f"Couldn't connect to db on localhost because {e}")
         else:
             self.cursor = cnxn.cursor()
-            return cnxn
-
-
-db_client = DatabaseClient()
-db_client.pyodbc_localhost()
+            return cnxn_string

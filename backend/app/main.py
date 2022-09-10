@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
-from sqlalchemy.engine import create_engine
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
 import pandas as pd
 import pyodbc
 from app.db import DatabaseClient
@@ -13,14 +14,18 @@ CORS(app, resources={r"/*":{'origins':"*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
+@app.route('/home')
 def index():
     return "<span style='color:red'>I am app 1</span>"
 
 db_client = DatabaseClient()
 
-cnxn = db_client.pyodbc_localhost()
-
-engine = create_engine(cnxn)
+cnxn_str = db_client.pyodbc_localhost()
+cnxn_url = URL.create(
+    "mssql+pyodbc", 
+    query={"odbc_connect": cnxn_str}
+)
+engine = create_engine(cnxn_url)
 class Database_df:
     def __init__(self, tables_df=pd.DataFrame(), table_name_list=[], select_template='', frames_dict={}):
         self.tables_df = tables_df
@@ -45,3 +50,4 @@ class Database_df:
             return self.frames_dict
 
 frames_dict = Database_df().create_dataframes(engine)
+
