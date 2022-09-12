@@ -1,6 +1,6 @@
 import pandas as pd
 from app import main
-from flask import jsonify, request, Response
+from flask import jsonify, request
 from app.utilities import endDate
 from app.dataframes import df_Index_Constituents, df_FTSEJSE_Index_Series, df_Industry_Classification_Benchmark, df_BA_Beta_Output
 
