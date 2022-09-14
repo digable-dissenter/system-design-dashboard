@@ -4,5 +4,3 @@ from app.main import app
 # Statement starts the Flask server on your local machine
 if __name__ == "__main__":
     app.run(debug=True)
-
-from app import db, indices , sectors, shares, quarters, dataframes

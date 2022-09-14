@@ -1,21 +1,21 @@
 import pandas as pd
 from app import main
+import json
 from flask import jsonify, request, Response
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from app.dataframes import df_Index_Constituents, df_Industry_Classification_Benchmark, df_BA_Beta_Output
 
 app = main.app
 
 CORS(app, resources={r"/*":{'origins':"*"}})
 
-@app.route("/api/sectors/available-sectors")
-@cross_origin()
+@app.route("/api/sectors/available-sectors", methods=["GET"])
 def getAvailableSectors():
-    results_df = df_Industry_Classification_Benchmark.drop_duplicates()
+    sectors_ls = df_Industry_Classification_Benchmark.Sector.unique().tolist()
     
-    return results_df.to_json(orient='records')
-    # resp = jsonify(results_df)
-
-    # resp.status_code = 200
-
-    # return resp
+    results_dict = {}
+    results_dict = {k:v for (k, v) in enumerate(sectors_ls)}
+    
+    resp = json.dumps(results_dict)
+    
+    return resp

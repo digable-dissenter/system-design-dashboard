@@ -52,7 +52,7 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
             case  "LRGG"|"MIDC"|"SMILC":
                 return "Index New"
             case default:
-                return argument+" New"
+                return argument + " New"
     
     IndexCode_Col = Index_Col_Identifier(IndexCode) #Obtain column name to search relevant rows
 
@@ -66,16 +66,6 @@ def getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents):
     Gross_Market_Capitalisation = pd.DataFrame(Gross_Market_Capitalisation)
     ICB_SubSector = pd.DataFrame(tbl_Index_Constituents_final.loc[:,"ICB Sub-Sector"])
     Results = pd.concat([Alpha.reset_index(drop=True), Weigths.reset_index(drop=True),Gross_Market_Capitalisation.reset_index(drop=True),ICB_SubSector.reset_index(drop=True)],axis=1)
-    Results.columns = ['Alpha','Weights','Gross Market Capitalisation','ICB Sub-Sector']
+    Results.columns = ['Alpha', 'Weights', 'Gross Market Capitalisation', 'ICB Sub-Sector']
 
     return Results
-
-Quarter_month = {1:3, 2:6, 3:9, 4:12}
-
-rDate_year = '2019' #Get year from user
-rDate_quarter = 2 #get quarter from user
-rDate_month = str(Quarter_month[rDate_quarter])
-rDate = rDate_year +"-"+ rDate_month #Create single date value from supplied year and quarter
-
-IndexCode = "ALSI" #Get input from user
-Output1 = getICsAndWeights(rDate,IndexCode,tbl_Index_Constituents)

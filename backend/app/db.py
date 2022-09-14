@@ -1,4 +1,3 @@
-
 import pyodbc
 class DatabaseClient:
     def __init__(self):

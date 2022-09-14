@@ -1,48 +1,68 @@
+# from crypt import methods
 import pandas as pd
 from app import main
-from flask import jsonify, request
+from flask import request
+import json
 from app.dataframes import df_EOD_Interest_Rate_Data
 
 app = main.app
 
-@app.route('/api/int-rates/')
+@app.route('/api/int-rates/', methods=['GET'])
 def getIntRates():
     qry_args = request.args
     curve = qry_args.get("curve")
     tenor = qry_args.get("tenor")
-    # Divide Rate by 100, round to 2 decimal places, and convert to JSON
-    qry = 'Tenor == {0} and Curve >= {1}'.format(tenor, curve)
-    results_df = df_EOD_Interest_Rate_Data.query(qry, inplace = True)
-
-    resp = results_df.to_json(orient='records')
     
-    resp.status_code = 200
+    # Divide Rate by 100, round to 2 decimal places
+    int_rates_df = df_EOD_Interest_Rate_Data.set_index(["Curve"])
+    int_rates_df = int_rates_df.loc[[curve]]
+    int_rates_df.reset_index(inplace=True)
+
+    int_rates_df = int_rates_df.set_index(["Tenor"])
+    int_rates_df = int_rates_df.loc[[tenor]]
+    int_rates_df.reset_index(inplace=True)
+
+    int_rates_df.set_index(['Date', 'Rate'])
+    
+    results_df = int_rates_df.loc[:, ['Date', 'Rate']]
+
+    resp = results_df.to_json(orient='records') 
     
     return resp
 
-@app.route('/api/int-rates/dates/')
+@app.route('/api/int-rates/dates/', methods=['GET'])
 def getIntRateDates():
     # Order by Date, then Convert to JSON - numpy values are not JSON serializable
-    results_df = df_EOD_Interest_Rate_Data['Date'].unique()  
-
-    resp = results_df.to_json(orient='records')
+    intdates_ls = df_EOD_Interest_Rate_Data.Date.dt.strftime('%Y-%m-%d').unique().tolist()
     
-    resp.status_code = 200
-    
-    return resp
+    results_dict = {}
+    results_dict = {k:v for (k, v) in enumerate(intdates_ls)}
 
-@app.route('/api/int-rates/dates/')
+    resp = json.dumps(results_dict)
+    
+    return resp 
+    
+    
+
+@app.route('/api/int-rates/yield/', methods=['GET'])
 def getYC():    
     qry_args = request.args
     date = qry_args.get("date")
-    tenor = qry_args.get("tenor")
-    
-    qry = 'Tenor == {0} and Date = {1}'.format(tenor, date)
-    # Divide Rate by 100, round to 2 decimal places, and convert to JSON (Order by Tenor)
-    results_df = df_EOD_Interest_Rate_Data.query(qry, inplace = True)
+    curve = qry_args.get("curve")
 
-    resp = results_df.to_json(orient='records')
+    # Divide Rate by 100, round to 2 decimal places
+    yc_df = df_EOD_Interest_Rate_Data.set_index(["Curve"])
+    yc_df = yc_df.loc[[curve]]
+    yc_df.reset_index(inplace=True)
+
+    yc_df = yc_df.set_index(["Date"]).sort_index(level=["Date"], ascending=[False])
+    yc_df = yc_df.loc[[date]]
+    yc_df.reset_index(inplace=True)
     
-    resp.status_code = 200
+    yc_df.set_index(['Tenor', 'Rate'])
+    
+    results_df = yc_df.loc[:, ['Tenor', 'Rate']]
+
+    resp = results_df.to_json(orient='records') 
     
     return resp

@@ -1,9 +1,8 @@
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 import pandas as pd
-import pyodbc
 from app.db import DatabaseClient
 
 app = Flask(__name__)
@@ -17,6 +16,10 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/home')
 def index():
     return "<span style='color:red'>I am app 1</span>"
+
+@app.route('/shark', methods=['GET'])
+def shark():
+    return("Shark🦈!")
 
 db_client = DatabaseClient()
 
@@ -50,4 +53,6 @@ class Database_df:
             return self.frames_dict
 
 frames_dict = Database_df().create_dataframes(engine)
+
+from app import indices, interest_rates, quarters, sectors, shares
 
